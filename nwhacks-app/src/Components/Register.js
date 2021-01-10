@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { Face, Fingerprint, MailOutline } from '@material-ui/icons';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { login } from '../repository';
+import { register } from '../repository';
 
 const StyledPaper = styled(Paper)`
     padding-top: 50px;
@@ -50,7 +50,7 @@ const Register = ({}) => {
             return;
         }
 
-        login(name, email, password)
+        register(name, email, password)
             .then((res) => {
                 console.log(res);
             })
