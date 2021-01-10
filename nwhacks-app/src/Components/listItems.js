@@ -52,12 +52,6 @@ export const secondaryListItems = (
                 <ListItemText primary="Current month" />
             </ListItem>
         </Link>
-        <ListItem button>
-            <ListItemIcon>
-                <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Current year" />
-        </ListItem>
         <Link to="/allexpenses" style={{'text-decoration': 'none', 'color': 'white'}}>
         <ListItem button>
             <ListItemIcon>
