@@ -11,6 +11,7 @@ from azure.ai.formrecognizer import FormRecognizerClient
 from azure.ai.formrecognizer import FormTrainingClient
 from azure.core.credentials import AzureKeyCredential
 
+
 from ..config import KEY
 from ..config import ENDPOINT
 
@@ -26,10 +27,9 @@ def extract():
     # user_id = request.form.get('user_id')
 
     user_id = request.form.get('user_id')
-    file_path = request.form.get('receipt')
+    receipt = request.files['receipt']
     
-    with open(file_path, "rb") as f:
-       poller = form_recognizer_client.begin_recognize_receipts(receipt=f)
+    poller = form_recognizer_client.begin_recognize_receipts(receipt=receipt)
     result = poller.result()
 
     receipts = []

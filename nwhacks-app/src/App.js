@@ -3,6 +3,7 @@ import Login from './Components/Login';
 import Expenses from './Components/Expenses';
 import Dashboard from './Components/Dashboard';
 import Register from './Components/Register';
+import ImgDropzoneDialog from './Components/ImgUploadDialog';
 import {
   BrowserRouter as Router,
   Switch,

@@ -16,6 +16,17 @@ export const register = (name, email, password) => {
     return axios.post(API_URI.concat('/register'), formData);
 };
 
+
+export const uploadReceipt = (account_id, file) => {
+    let formData = new FormData();
+    formData.append("user_id", account_id)
+    formData.append("receipt", file);
+    return axios.post(API_URI.concat('/extract_receipt'), formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }});
+};
+
 export const getExpensesForThisMonth = (accountID) => {
     const today = new Date();
     const currMonth = String(today.getMonth() + 1);
