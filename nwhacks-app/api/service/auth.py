@@ -1,6 +1,7 @@
 import hashlib
 from flask import Blueprint, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
+from flask_cors import cross_origin
 from werkzeug.security import generate_password_hash, check_password_hash
 from ..models import User
 from ..db import Session
@@ -12,6 +13,7 @@ def login():
     return 'Login'
 
 @auth.route('/login', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def login_post():
     session = Session()
 

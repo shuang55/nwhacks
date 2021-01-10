@@ -17,15 +17,15 @@ export default function App() {
   <Router>
     <div className="App">
       <Switch>
-        <Route path="/Login">
+        <Route path="/login">
           <Header />
           <Login />
         </Route>
-        <Route path="/Expenses">
+        <Route path="/expenses">
           <ExpenseCard />
         </Route>
         <Route path="/">
-          <Redirect to="/Login"></Redirect>
+          <Redirect to="/login"></Redirect>
         </Route>
       </Switch>
   </div>
