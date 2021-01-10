@@ -1,7 +1,5 @@
 import './App.css';
-import logo from './logo.svg';
 import Login from './Components/Login';
-import Header from './Components/Header';
 import ExpenseCard from './Components/ExpenseCard';
 import Register from './Components/Register';
 import {
@@ -15,13 +13,17 @@ import {
 export default function App() {
   return (
       <Router>
-          <div className="App">
+          <div>
               <Switch>
                   <Route path="/login">
-                      <Login />
+                      <div className="App">
+                          <Login />
+                      </div>
                   </Route>
                   <Route path="/register">
-                      <Register />
+                      <div className="App">
+                          <Register />
+                      </div>
                   </Route>
                   <Route path="/expenses">
                       <ExpenseCard />
