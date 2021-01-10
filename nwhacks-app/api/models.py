@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Float
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 
@@ -19,16 +19,16 @@ class Receipt(Base):
     name = Column(String(100))
     date = Column(Date)
     num_items = Column(Integer)
-    total_price = Column(Integer)
+    total_price = Column(Float)
     expenses = relationship('Expense', backref='expense', lazy=True)
     
 class Expense(Base):
     __tablename__ = 'expense'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer,  ForeignKey('user.id'))
-    receipt_fk = Column(Integer, ForeignKey('receipt.id'))
+    receipt_id = Column(Integer, ForeignKey('receipt.id'))
     item_name = Column(String(100))
     vendor_name = Column(String(100))
     date = Column(Date)
-    price = Column(Integer)
+    price = Column(Float)
     quantity = Column(Integer)
