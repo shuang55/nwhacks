@@ -3,6 +3,8 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 import TextField from '@material-ui/core/TextField';
 import { MailOutline, Fingerprint } from '@material-ui/icons';
 import styled from 'styled-components';
@@ -26,6 +28,10 @@ const Login = ({}) => {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const [error, setError] = useState({ email: '', password: '' });
+    const [toastMessage, setToastMessage] = useState({
+        status: '',
+        message: '',
+    });
 
     const validateForm = () => {
         let isValid = true;
@@ -50,13 +56,21 @@ const Login = ({}) => {
         if (!validateForm()) {
             return;
         }
+        setToastMessage({ status: '', message: '' });
 
         login(email, password)
             .then((res) => {
-                console.log(res);
+                localStorage.setItem('user', res.data)
+                setToastMessage({
+                    status: true,
+                    message: 'Successfully Logged In!',
+                });
             })
             .catch((err) => {
-                console.log(err);
+                setToastMessage({
+                    status: false,
+                    message: err.response.data.message,
+                });
             });
     };
 
@@ -120,6 +134,20 @@ const Login = ({}) => {
                     Not registered? Click here to create an account.
                 </StyledLink>
             </Box>
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                open={!!toastMessage.message}
+                autoHideDuration={5000}
+                onClose={() => {
+                    setToastMessage(false);
+                }}
+            >
+                {toastMessage.status === true ? (
+                    <Alert severity="success">{toastMessage.message}</Alert>
+                ) : (
+                    <Alert severity="error">{toastMessage.message}</Alert>
+                )}
+            </Snackbar>
         </StyledPaper>
     );
 };

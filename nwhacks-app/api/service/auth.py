@@ -24,11 +24,11 @@ def login_post():
     user = session.query(User).filter_by(email=email).first()
 
     if not user or not check_password_hash(user.password, password):
-        return redirect(url_for('auth.login'))
+        return make_response({'message': 'Invalid login'}, 400)
     
     login_user(user, remember=remember)
 
-    return "Logged in successfully!"
+    return make_response({'message': 'Successfully Logged In!', 'userID': user.id, 'userName': user.name}, 200)
 
 @auth.route('/register', methods=['POST'])
 @cross_origin(supports_credentials=True)
@@ -39,9 +39,6 @@ def register_post():
     name = request.form.get('name')
     password = request.form.get('password')
     user = session.query(User).filter_by(email=email).first()
-    print(email)
-    print(name)
-    print(password)
 
     if user: 
         return make_response({'message': 'User already Exists'}, 400)
