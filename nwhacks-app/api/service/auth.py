@@ -1,5 +1,5 @@
 import hashlib
-from flask import Blueprint, redirect, url_for, request, flash
+from flask import Blueprint, redirect, url_for, request, flash, jsonify, make_response
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_cors import cross_origin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -24,14 +24,15 @@ def login_post():
     user = session.query(User).filter_by(email=email).first()
 
     if not user or not check_password_hash(user.password, password):
-        return redirect(url_for('auth.login'))
+        return make_response({'message': 'Invalid login'}, 400)
     
     login_user(user, remember=remember)
 
-    return "Logged in successfully!"
+    return make_response({'message': 'Successfully Logged In!', 'userID': user.id, 'userName': user.name}, 200)
 
-@auth.route('/signup', methods=['POST'])
-def signup_post():
+@auth.route('/register', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def register_post():
     session = Session()
 
     email = request.form.get('email')
@@ -40,13 +41,13 @@ def signup_post():
     user = session.query(User).filter_by(email=email).first()
 
     if user: 
-        return redirect(url_for('auth.login'))
-    
+        return make_response({'message': 'User already Exists'}, 400)
+ 
     new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
     session.add(new_user)
     session.commit()
 
-    return redirect(url_for('auth.login'))
+    return make_response({'message': 'User successfully created'}, 200)
 
 @auth.route('/profile')
 @login_required
