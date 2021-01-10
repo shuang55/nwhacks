@@ -48,7 +48,7 @@ const columns = [
     },
     {
         id: 'price',
-        label: 'Price',
+        label: 'Price ($)',
         minWidth: 170,
         align: 'right',
     },
@@ -75,7 +75,7 @@ const Expenses = () => {
                     return {
                         name: expenses['item_name'],
                         vendor: expenses['vendor_name'],
-                        price: expenses['price'],
+                        price: Number.parseFloat(expenses['price']).toFixed(2),
                         date: new Date(expenses['date']).toDateString(),
                     };
                 });
