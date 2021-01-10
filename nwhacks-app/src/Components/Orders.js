@@ -73,7 +73,7 @@ const Orders = () => {
             </TableBody>
         </Table>
         <div className={classes.seeMore}>
-            <Link color="primary" href="#" onClick={preventDefault}>
+            <Link color="primary" href="/expenses">
             See more
             </Link>
         </div>

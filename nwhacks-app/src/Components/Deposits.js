@@ -58,7 +58,7 @@ const Deposits = () => {
         {date}
       </Typography>
       <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
+        <Link color="primary" href="/expenses">
           View expenses
         </Link>
       </div>
