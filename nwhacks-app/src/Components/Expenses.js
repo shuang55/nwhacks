@@ -54,10 +54,6 @@ const columns = [
     },
 ];
 
-function createData(name, vendor, price, date) {
-    return { name, vendor, price, date };
-}
-
 const useStyles = makeStyles({
     root: {
         width: '70%',
@@ -75,9 +71,14 @@ const Expenses = () => {
         const userInfo = JSON.parse(localStorage.getItem('user'));
         getExpensesForThisMonth(userInfo['userID'])
             .then((res) => {
-                const expenses = res.data.expenses.map(expenses => {
-                  return {name: expenses['item_name'], vendor: expenses['vendor_name'], price: expenses['price'], date: new Date(expenses['date']).toDateString()}
-                })
+                const expenses = res.data.expenses.map((expenses) => {
+                    return {
+                        name: expenses['item_name'],
+                        vendor: expenses['vendor_name'],
+                        price: expenses['price'],
+                        date: new Date(expenses['date']).toDateString(),
+                    };
+                });
                 setExpenses(expenses);
             })
             .catch((err) => {
