@@ -51,7 +51,7 @@ const Register = ({}) => {
     };
 
     const handleSubmitForm = () => {
-        setToastMessage('');
+        setToastMessage({ status: '', message: '' });
         if (!validateForm()) {
             return;
         }
@@ -59,7 +59,7 @@ const Register = ({}) => {
         register(name, email, password)
             .then((res) => {
                 setToastMessage({status: true, message: 'Successfully Registered!'});
-                setTimeout(() => {setShouldRedirect(true)}, 1000);
+                setTimeout(() => {setShouldRedirect(true)}, 500);
             })
             .catch((err) => {
                 setToastMessage({status: false, message: err.response.data.message});

@@ -6,11 +6,11 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ImgDropzoneDialog from './ImgUploadDialog';
-
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
@@ -41,7 +41,10 @@ export const mainListItems = (
 export const secondaryListItems = (
     <div>
         <ListSubheader inset>Saved Expenses</ListSubheader>
-        <Link to="/expenses" style={{'text-decoration': 'none', 'color': 'white'}}>
+        <Link
+            to="/expenses"
+            style={{ 'text-decoration': 'none', color: 'white' }}
+        >
             <ListItem button>
                 <ListItemIcon>
                     <AssignmentIcon />
@@ -61,5 +64,13 @@ export const secondaryListItems = (
             </ListItemIcon>
             <ListItemText primary="All time" />
         </ListItem>
+        <Link to="/logout" style={{'text-decoration': 'none', color: 'white'}}>
+          <ListItem button>
+              <ListItemIcon>
+                  <PowerSettingsNewIcon />
+              </ListItemIcon>
+              <ListItemText primary="Log out" />
+          </ListItem>
+        </Link>
     </div>
 );

@@ -69,7 +69,7 @@ const Login = ({}) => {
                 });
                 setTimeout(() => {
                     setShouldRedirect(true);
-                }, 1000);
+                }, 500);
             })
             .catch((err) => {
                 setToastMessage({

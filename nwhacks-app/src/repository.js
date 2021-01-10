@@ -16,6 +16,9 @@ export const register = (name, email, password) => {
     return axios.post(API_URI.concat('/register'), formData);
 };
 
+export const logout = () => {
+    return axios.get(API_URI.concat('/logout'));
+};
 
 export const uploadReceipt = (account_id, file) => {
     let formData = new FormData();
