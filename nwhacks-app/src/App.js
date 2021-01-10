@@ -1,6 +1,6 @@
 import './App.css';
 import Login from './Components/Login';
-import ExpenseCard from './Components/ExpenseCard';
+import Expenses from './Components/Expenses';
 import Register from './Components/Register';
 import {
   BrowserRouter as Router,
@@ -26,7 +26,7 @@ export default function App() {
                       </div>
                   </Route>
                   <Route path="/expenses">
-                      <ExpenseCard />
+                      <Expenses />
                   </Route>
                   <Route path="/">
                       <Redirect to="/login"></Redirect>
