@@ -72,7 +72,7 @@ const Login = ({}) => {
                                 label="Email"
                                 type="email"
                                 variant="outlined"
-                                error={error.email}
+                                error={!!error.email}
                                 helperText={error.email}
                                 required
                                 onChange={(e) => setEmail(e.target.value)}
@@ -90,7 +90,7 @@ const Login = ({}) => {
                                 label="Password"
                                 type="password"
                                 variant="outlined"
-                                error={error.password}
+                                error={!!error.password}
                                 helperText={error.password}
                                 required
                                 onChange={(e) => setPassword(e.target.value)}
@@ -104,8 +104,8 @@ const Login = ({}) => {
                         disableElevation
                         size="medium"
                         style={{
-                            'margin-top': '25px',
-                            'margin-bottom': '10px',
+                            'marginTop': '25px',
+                            'marginBottom': '10px',
                             textTransform: 'none',
                         }}
                         onClick={() => handleSubmitForm()}
