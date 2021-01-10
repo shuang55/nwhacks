@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/siwonpark/Desktop/nwhacks/nwhacks-backend/venv"
+VIRTUAL_ENV="/Users/siwonpark/Desktop/nwhacks/nwhacks-app/api/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
