@@ -25,6 +25,7 @@ def extract():
     # receiptUrl = request.form.get('receipt')
     # user_id = request.form.get('user_id')
 
+    user_id = request.form.get('user_id')
     file_path = request.form.get('receipt')
     
     with open(file_path, "rb") as f:
@@ -58,7 +59,7 @@ def extract():
                         if item_name == "quantity":
                             quantity = int(item.value)
                         print("......{}: {} has confidence {}".format(item_name, item.value, item.confidence))
-                    expense = Expense(item_name=exp_name, vendor_name=rec_name, date=date, price=price, quantity=quantity)
+                    expense = Expense(item_name=exp_name, user_id=user_id, vendor_name=rec_name, date=date, price=price, quantity=quantity)
                     expenses.append(expense)
             else:
                 if (name == "MerchantName"):

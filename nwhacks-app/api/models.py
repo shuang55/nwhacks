@@ -11,6 +11,7 @@ class User(Base, UserMixin):
     email = Column(String(100), unique=True)
     password = Column(String(100))
     name = Column(String(1000))
+    # expenses = relationship('Expense', backref='expense', lazy=True)
 
 class Receipt(Base):
     __tablename__ = 'receipt'
@@ -24,6 +25,7 @@ class Receipt(Base):
 class Expense(Base):
     __tablename__ = 'expense'
     id = Column(Integer, primary_key=True)
+    user_id = Column(Integer,  ForeignKey('user.id'))
     receipt_fk = Column(Integer, ForeignKey('receipt.id'))
     item_name = Column(String(100))
     vendor_name = Column(String(100))
