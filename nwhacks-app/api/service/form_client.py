@@ -22,10 +22,13 @@ def extract():
     session = Session()
     form_recognizer_client = FormRecognizerClient(ENDPOINT, AzureKeyCredential(KEY))
 
-    receiptUrl = request.form.get('receipt')
+    # receiptUrl = request.form.get('receipt')
     # user_id = request.form.get('user_id')
+
+    file_path = request.form.get('receipt')
     
-    poller = form_recognizer_client.begin_recognize_receipts_from_url(receiptUrl)
+    with open(file_path, "rb") as f:
+       poller = form_recognizer_client.begin_recognize_receipts(receipt=f)
     result = poller.result()
 
     receipts = []
