@@ -55,11 +55,13 @@ export const secondaryListItems = (
             </ListItemIcon>
             <ListItemText primary="Current year" />
         </ListItem>
+        <Link to="/allexpenses" style={{'text-decoration': 'none', 'color': 'white'}}>
         <ListItem button>
             <ListItemIcon>
                 <AssignmentIcon />
             </ListItemIcon>
             <ListItemText primary="All time" />
         </ListItem>
+        </Link>
     </div>
 );

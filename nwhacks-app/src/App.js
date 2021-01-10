@@ -1,6 +1,7 @@
 import './App.css';
 import Login from './Components/Login';
 import Expenses from './Components/Expenses';
+import AllExpenses from './Components/AllExpenses';
 import Dashboard from './Components/Dashboard';
 import Register from './Components/Register';
 import ImgDropzoneDialog from './Components/ImgUploadDialog';
@@ -31,6 +32,11 @@ export default function App() {
                   <Route path="/expenses">
                       <div className="App">
                           <Expenses />
+                      </div>
+                  </Route>
+                  <Route path="/allexpenses">
+                      <div className="App">
+                          <AllExpenses />
                       </div>
                   </Route>
                   <Route path="/dashboard">

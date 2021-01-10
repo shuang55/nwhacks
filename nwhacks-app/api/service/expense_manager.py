@@ -26,6 +26,19 @@ def get_expenses():
 
     return {'expenses' : parsed}
 
+@expense.route('/get_all_expenses', methods=["GET"])
+def get_all_expenses():
+    # query expenses by month
+    session = Session()
+    user_id = request.args.get('user_id')
+    expense_list = session.query(Expense).filter(Expense.user_id == user_id).all()
+
+    print(expense_list)
+    
+    parsed = [{'item_name': exp.item_name, 'vendor_name' : exp.vendor_name, 'date' : exp.date, 'price' : exp.price, 'quantity' : exp.quantity} for exp in expense_list]
+
+    return {'expenses' : parsed}
+
 @expense.route('/delete_expense', methods=["DELETE"])
 def delete_expense():
     session = Session()

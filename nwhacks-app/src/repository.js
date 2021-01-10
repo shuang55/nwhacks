@@ -38,3 +38,12 @@ export const getExpensesForThisMonth = (accountID) => {
         }
     });
 };
+
+export const getAllTimeExpenses = (accountID) => {
+
+    return axios.get(API_URI.concat('/get_all_expenses'), {
+        params: {
+            'user_id': accountID,
+        }
+    });
+};
