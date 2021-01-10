@@ -17,8 +17,8 @@ def get_expenses():
     # query expenses by month
     session = Session()
     month = request.args.get('month')
-    print(month)
-    expense_list = session.query(Expense).filter(extract('month', Expense.date) == month).all()
+    user_id = request.args.get('user_id')
+    expense_list = session.query(Expense).filter(extract('month', Expense.date) == month, Expense.user_id == user_id).all()
 
     print(expense_list)
     
