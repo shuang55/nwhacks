@@ -9,3 +9,19 @@ class User(Base):
     email = Column(String(100), unique=True)
     password = Column(String(100))
     name = Column(String(1000))
+
+class Receipt(Base):
+    __tablename__ = 'receipt'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100))
+    date = Column(DateTime(timezone=False))
+    num_items = Column(Integer)
+    expenses = relationship('Expense', backref='expense', lazy=True)
+    
+class Expense(Base):
+    __tablename__ = 'expense'
+    id = Column(Integer, primary_key=True)
+    receipt_fk = Column(Integer, ForeignKey('receipt.id'))
+    item_name = Column(String(100))
+    price = Column(Integer)
+    quantity = Column(Integer)
