@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, url_for, request
-from models.user import User
+from ..models import User
 
 auth = Blueprint('auth', __name__)
 
