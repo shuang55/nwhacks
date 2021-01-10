@@ -58,25 +58,6 @@ function createData(name, vendor, price, date) {
     return { name, vendor, price, date };
 }
 
-const rows = [
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 133, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-    createData('Ice Cream', 'Dairy Queen', 132, 'Feb 15'),
-];
-
 const useStyles = makeStyles({
     root: {
         width: '70%',
@@ -91,10 +72,13 @@ const Expenses = () => {
     const [expenses, setExpenses] = useState([]);
 
     useEffect(() => {
-        const userInfo = localStorage.getItem('user');
+        const userInfo = JSON.parse(localStorage.getItem('user'));
         getExpensesForThisMonth(userInfo['userID'])
             .then((res) => {
-                setExpenses(res.data.expenses);
+                const expenses = res.data.expenses.map(expenses => {
+                  return {name: expenses['item_name'], vendor: expenses['vendor_name'], price: expenses['price'], date: new Date(expenses['date']).toDateString()}
+                })
+                setExpenses(expenses);
             })
             .catch((err) => {
                 console.log(err);
@@ -131,7 +115,7 @@ const Expenses = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows
+                        {expenses
                             .slice(
                                 page * rowsPerPage,
                                 page * rowsPerPage + rowsPerPage
@@ -166,7 +150,7 @@ const Expenses = () => {
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={rows.length}
+                count={expenses.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}

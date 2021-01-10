@@ -62,7 +62,7 @@ const Login = ({}) => {
 
         login(email, password)
             .then((res) => {
-                localStorage.setItem('user', res.data)
+                localStorage.setItem('user', JSON.stringify(res.data))
                 setToastMessage({
                     status: true,
                     message: 'Successfully Logged In!',
