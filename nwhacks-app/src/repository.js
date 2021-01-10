@@ -15,3 +15,12 @@ export const register = (name, email, password) => {
     formData.append('name', name);
     return axios.post(API_URI.concat('/register'), formData);
 };
+
+export const load_expenses = (user_id, month) => {
+    return axios.get(API_URI.concat('/get_expenses', {
+        params: {
+          user_id: user_id,
+          month: month
+        }
+      }));
+};
