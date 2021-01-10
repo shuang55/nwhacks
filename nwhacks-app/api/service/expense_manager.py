@@ -12,23 +12,6 @@ from ..config import KEY
 from ..config import ENDPOINT
 expense = Blueprint('expense', __name__)
 
-#tentative...
-@expense.route("/save")
-def save_receipt_as_expense():
-    """
-    Takes a local receipt path and runs the image through the Form
-    """
-    
-    #Call the endpoint that converts the receipt to usable data
-    #begin_recognize_content to run recognizer on local files
-    # https://docs.microsoft.com/en-us/python/api/azure-ai-formrecognizer/azure.ai.formrecognizer.formrecognizerclient?view=azure-python
-
-
-    #Save receipt as multiple expenses to DB
-    return 'Save'
-
-
-
 @expense.route('/get_expenses', methods=["GET"])
 def get_expenses():
     # query expenses by month
@@ -42,3 +25,16 @@ def get_expenses():
     parsed = [{'item_name': exp.item_name, 'vendor_name' : exp.vendor_name, 'date' : exp.date, 'price' : exp.price, 'quantity' : exp.quantity} for exp in expense_list]
 
     return {'expenses' : parsed}
+
+@expense.route('/delete_expense', methods=["DELETE"])
+def delete_expense():
+    session = Session()
+    delete_id = request.args.get('delete_id')
+
+    print('id', delete_id)
+
+    deleted = session.query(Expense).filter(Expense.id == delete_id).delete()
+
+    session.commit()
+    print('deleted', deleted)
+    return 'Success'
