@@ -5,6 +5,8 @@ import AllExpenses from './Components/AllExpenses';
 import Dashboard from './Components/Dashboard';
 import Register from './Components/Register';
 import ImgDropzoneDialog from './Components/ImgUploadDialog';
+import Logout from './Components/Logout';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -41,6 +43,9 @@ export default function App() {
                   </Route>
                   <Route path="/dashboard">
                       <Dashboard />
+                  </Route>
+                  <Route path="/logout">
+                      <Logout />
                   </Route>
                   <Route path="/">
                       <Redirect to="/login"></Redirect>
