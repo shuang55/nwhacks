@@ -1,5 +1,6 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Date
+from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 
 Base = declarative_base()
@@ -15,7 +16,7 @@ class Receipt(Base):
     __tablename__ = 'receipt'
     id = Column(Integer, primary_key=True)
     name = Column(String(100))
-    date = Column(DateTime(timezone=False))
+    date = Column(Date)
     num_items = Column(Integer)
     expenses = relationship('Expense', backref='expense', lazy=True)
     

@@ -11,8 +11,8 @@ from azure.ai.formrecognizer import FormRecognizerClient
 from azure.ai.formrecognizer import FormTrainingClient
 from azure.core.credentials import AzureKeyCredential
 
-from .config import KEY
-from .config import ENDPOINT
+from ..config import KEY
+from ..config import ENDPOINT
 
 
 form_client = Blueprint('form-client', __name__)

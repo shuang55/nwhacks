@@ -4,7 +4,7 @@ from flask_login import LoginManager
 from .service.expense_manager import expense as expense_blueprint
 from .service.auth import auth as auth_blueprint
 from .db import recreate_database, Session
-from .service.form-client import form_client as form_client_blueprint
+from .service.form_client import form_client as form_client_blueprint
 from .models import User
 
 app = Flask(__name__)
@@ -22,6 +22,7 @@ login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 
 session = Session()
+
 
 @login_manager.user_loader
 def load_user(user_id):
