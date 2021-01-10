@@ -10,6 +10,7 @@ import { MailOutline, Fingerprint } from '@material-ui/icons';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { login } from '../repository';
+import { Redirect } from 'react-router-dom';
 
 const StyledPaper = styled(Paper)`
     padding-top: 50px;
@@ -32,6 +33,7 @@ const Login = ({}) => {
         status: '',
         message: '',
     });
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const validateForm = () => {
         let isValid = true;
@@ -65,6 +67,9 @@ const Login = ({}) => {
                     status: true,
                     message: 'Successfully Logged In!',
                 });
+                setTimeout(() => {
+                    setShouldRedirect(true);
+                }, 1000);
             })
             .catch((err) => {
                 setToastMessage({
@@ -148,6 +153,7 @@ const Login = ({}) => {
                     <Alert severity="error">{toastMessage.message}</Alert>
                 )}
             </Snackbar>
+            {shouldRedirect && <Redirect to="/dashboard" />}
         </StyledPaper>
     );
 };
