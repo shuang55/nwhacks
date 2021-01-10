@@ -5,3 +5,5 @@ nwhacks-app/api/venv
 */node_modules
 .DS_Store
 .vscode
+nwhacks-app/.eslintcache
+nwhacks-app/api/env
