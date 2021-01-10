@@ -1,3 +1,4 @@
+import hashlib
 from flask import Blueprint, redirect, url_for, request
 from ..models import User
 
@@ -17,6 +18,9 @@ def signup_post():
 
     if user: 
         return redirect(url_for('auth.login'))
+    
+    new_user = User(email=email, name=name, password=hashlib.sha256(password.encode))
+
 
 
 @auth.route('/logout')
