@@ -29,10 +29,12 @@ export default function App() {
                       </div>
                   </Route>
                   <Route path="/expenses">
-                      <Expenses />
+                      <div className="App">
+                          <Expenses />
+                      </div>
                   </Route>
                   <Route path="/dashboard">
-                    <Dashboard />
+                      <Dashboard />
                   </Route>
                   <Route path="/">
                       <Redirect to="/login"></Redirect>

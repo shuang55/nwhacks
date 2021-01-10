@@ -36,5 +36,5 @@ export const getExpensesForThisMonth = (accountID) => {
             'user_id': accountID,
             'month': currMonth
         }
-    })
-}
+    });
+};
