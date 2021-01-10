@@ -65,6 +65,7 @@ export const secondaryListItems = (
             </ListItemIcon>
             <ListItemText primary="All time" />
         </ListItem>
+        </Link>
         <Link to="/logout" style={{'text-decoration': 'none', color: 'white'}}>
           <ListItem button>
               <ListItemIcon>
