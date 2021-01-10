@@ -1,13 +1,15 @@
 import './App.css';
 import Login from './Components/Login';
 import Expenses from './Components/Expenses';
+import Dashboard from './Components/Dashboard';
 import Register from './Components/Register';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
+  createMuiTheme
 } from "react-router-dom";
 
 export default function App() {
@@ -27,6 +29,9 @@ export default function App() {
                   </Route>
                   <Route path="/expenses">
                       <Expenses />
+                  </Route>
+                  <Route path="/dashboard">
+                    <Dashboard />
                   </Route>
                   <Route path="/">
                       <Redirect to="/login"></Redirect>
