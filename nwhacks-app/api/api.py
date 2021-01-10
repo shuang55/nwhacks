@@ -1,6 +1,6 @@
 import psycopg2 as db
 from flask import Flask
-from auth.auth import auth as auth_blueprint
+from service.auth import auth as auth_blueprint
 
 app = Flask(__name__)
 

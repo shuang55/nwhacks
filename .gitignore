@@ -1,5 +1,6 @@
 nwhacks-app/node_modules
 nwhacks-app/api/__pycache__
+nwhacks-app/api/service/__pycache__
 nwhacks-app/api/venv
 */node_modules
 .DS_Store
