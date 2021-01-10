@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,13 +9,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { TableChartOutlined } from '@material-ui/icons';
-import blueGrey from '@material-ui/core/colors/blueGrey'
+import Title from './Title'
+
 
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#212936',
     color: theme.palette.common.white,
   },
   body: {
@@ -29,11 +30,13 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const StyledTablePagination = withStyles((theme) => ({
-  root: {
-      backgroundColor: '#212936',
-  },
-}))(TablePagination);
+const StyledPaper = styled(Paper)`
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-top: 5vh;
+    border: 2px;
+`;
 
 
 const columns = [
@@ -70,7 +73,7 @@ const rows = [
   createData('Ice Cream', 'Dairy Queen', 132, "Feb 15"),  
   createData('Ice Cream', 'Dairy Queen', 132, "Feb 15"),  
   createData('Ice Cream', 'Dairy Queen', 132, "Feb 15"),
-  createData('Ice Cream', 'Dairy Queen', 132, "Feb 15"),
+  createData('Ice Cream', 'Dairy Queen', 133, "Feb 15"),
   createData('Ice Cream', 'Dairy Queen', 132, "Feb 15"),  
   createData('Ice Cream', 'Dairy Queen', 132, "Feb 15"),  
   createData('Ice Cream', 'Dairy Queen', 132, "Feb 15"),
@@ -78,14 +81,15 @@ const rows = [
 
 const useStyles = makeStyles({
   root: {
-    width:  '50%',
-  }
+    width:  '70%',
+    color: "#212936"
+}
 });
 
 export default function StickyHeadTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -97,7 +101,8 @@ export default function StickyHeadTable() {
   };
 
   return (
-    <Paper className={classes.root}>
+    <StyledPaper variant="outlined" elevation={3} className={classes.root}>
+      <Title><b>Expenses</b></Title>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -116,7 +121,7 @@ export default function StickyHeadTable() {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-                <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.name}>
+                <StyledTableRow role="checkbox" tabIndex={-1} key={row.name}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
@@ -132,7 +137,7 @@ export default function StickyHeadTable() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
@@ -140,6 +145,6 @@ export default function StickyHeadTable() {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </StyledPaper>
   );
 }
