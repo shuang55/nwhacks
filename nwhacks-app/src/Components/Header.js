@@ -1,6 +1,10 @@
+import Box from '@material-ui/core/Box';
+
 const Header = ({ }) => {
     return (
-        <p> Expense Me </p>
+        <Box>
+            <p> Expense Me </p>
+        </Box>
     )
 }
 
