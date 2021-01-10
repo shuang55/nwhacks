@@ -1,34 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
+import { getExpensesForThisMonth } from '../repository';
+import '../chart.css';
 
 // Generate Sales Data
 function createData(time, amount) {
   return { time, amount };
 }
 
-const data = [
-  createData('5', 0),
-  createData('10', 50),
-  createData('15', 22),
-  createData('20', 38),
-  createData('30', 45),
-];
 
-export default function Chart() {
+const Chart = () => {
   const theme = useTheme();
+
+  const [expenses, setExpenses] = useState([]);
+  const [date, setDate] = useState([]);
+
+    useEffect(() => {
+        const d = new Date();
+        const month = d.toLocaleString('default', { month: 'long' });
+        setDate(month + " " + d.getFullYear());
+        const userInfo = JSON.parse(localStorage.getItem('user'));
+        
+        getExpensesForThisMonth(userInfo['userID'])
+            .then((res) => {
+                const expenses = res.data.expenses.map((expenses) => {
+                    return {
+                        date: new Date(expenses['date']).toDateString(),
+                        amount: expenses['price'],
+                        quantity: expenses['quantity']
+                    };
+                });
+                setExpenses(expenses);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
   return (
     <React.Fragment>
-      <Title>May 2021</Title>
+      <Title>{date}</Title>
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={expenses}
           margin={{
-            top: 16,
+            top: 20,
             right: 16,
-            bottom: 0,
+            bottom: 16,
             left: 24,
           }}
         >
@@ -39,7 +59,7 @@ export default function Chart() {
               position="left"
               style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
             >
-              Sales ($)
+              Spendings ($)
             </Label>
           </YAxis>
           <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
@@ -48,3 +68,5 @@ export default function Chart() {
     </React.Fragment>
   );
 }
+
+export default Chart;

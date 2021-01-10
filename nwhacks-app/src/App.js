@@ -1,6 +1,6 @@
 import './App.css';
 import Login from './Components/Login';
-import ExpenseCard from './Components/ExpenseCard';
+import Expenses from './Components/Expenses';
 import Dashboard from './Components/Dashboard';
 import Register from './Components/Register';
 import {
@@ -28,7 +28,7 @@ export default function App() {
                       </div>
                   </Route>
                   <Route path="/expenses">
-                      <ExpenseCard />
+                      <Expenses />
                   </Route>
                   <Route path="/dashboard">
                     <Dashboard />
