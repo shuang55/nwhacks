@@ -3,10 +3,13 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 import { Face, Fingerprint, MailOutline } from '@material-ui/icons';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { register } from '../repository';
+import { Redirect } from 'react-router-dom'
 
 const StyledPaper = styled(Paper)`
     padding-top: 50px;
@@ -21,6 +24,8 @@ const Register = ({}) => {
     const [password, setPassword] = useState(null);
     const [name, setName] = useState(null);
     const [error, setError] = useState({ name: '', email: '', password: '' });
+    const [toastMessage, setToastMessage] = useState({status: '', message: ''});
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const validateForm = () => {
         let isValid = true;
@@ -46,16 +51,18 @@ const Register = ({}) => {
     };
 
     const handleSubmitForm = () => {
+        setToastMessage('');
         if (!validateForm()) {
             return;
         }
 
         register(name, email, password)
             .then((res) => {
-                console.log(res);
+                setToastMessage({status: true, message: 'Successfully Registered!'});
+                setTimeout(() => {setShouldRedirect(true)}, 1000);
             })
             .catch((err) => {
-                console.log(err);
+                setToastMessage({status: false, message: err.response.data.message});
             });
     };
 
@@ -134,6 +141,21 @@ const Register = ({}) => {
                     </Button>
                 </form>
             </Box>
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                open={!!toastMessage.message}
+                autoHideDuration={5000}
+                onClose={() => {
+                    setToastMessage(false);
+                }}
+            >
+                {toastMessage.status === true ? (
+                    <Alert severity="success">{toastMessage.message}</Alert>
+                ) : (
+                    <Alert severity="error">{toastMessage.message}</Alert>
+                )}
+            </Snackbar>
+            {shouldRedirect && <Redirect to="/login" />}
         </StyledPaper>
     );
 };
