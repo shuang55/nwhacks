@@ -9,12 +9,14 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
         <DashboardIcon />
+        <Link to="/dashboard" />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
@@ -34,25 +36,27 @@ export const mainListItems = (
 );
 
 export const secondaryListItems = (
-  <div>
-    <ListSubheader inset>Saved Expenses</ListSubheader>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current year" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="All time" />
-    </ListItem>
-  </div>
+    <div>
+        <ListSubheader inset>Saved Expenses</ListSubheader>
+        <Link to="/expenses" style={{'text-decoration': 'none', 'color': 'white'}}>
+            <ListItem button>
+                <ListItemIcon>
+                    <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Current month" />
+            </ListItem>
+        </Link>
+        <ListItem button>
+            <ListItemIcon>
+                <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Current year" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="All time" />
+        </ListItem>
+    </div>
 );
