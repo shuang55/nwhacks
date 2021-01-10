@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {DropzoneDialog} from 'material-ui-dropzone'
 import Button from '@material-ui/core/Button';
 import { uploadReceipt } from '../repository';
-
  
 export default class ImgDropzoneDialog extends Component {
     constructor(props) {
@@ -41,8 +40,8 @@ export default class ImgDropzoneDialog extends Component {
  
     render() {
         return (
-            <div>
-                <Button onClick={this.handleOpen.bind(this)}>
+            <div style={{"width": "500%", "height": "250%"}}>
+                <Button style={{"width": "500%", "height": "250%"}} size="large" onClick={this.handleOpen.bind(this)}>
                 </Button>
                 <DropzoneDialog
                     open={this.state.open}
