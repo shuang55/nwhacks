@@ -1,10 +1,9 @@
-import { Link } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { MailOutline, Fingerprint } from '@material-ui/icons';
+import { Face, Fingerprint, MailOutline } from '@material-ui/icons';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { login } from '../repository';
@@ -17,19 +16,20 @@ const StyledPaper = styled(Paper)`
     margin-top: 30vh;
 `;
 
-const StyledLink = styled(Link)`
-    font-size: 10px;
-    text-decoration: none;
-`;
-
-const Login = ({}) => {
+const Register = ({}) => {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
-    const [error, setError] = useState({ email: '', password: '' });
+    const [name, setName] = useState(null);
+    const [error, setError] = useState({ name: '', email: '', password: '' });
 
     const validateForm = () => {
         let isValid = true;
         let formError = {};
+
+        if (!name) {
+            isValid = false;
+            formError = { ...formError, name: 'Cannot be blank' };
+        }
 
         if (!email) {
             isValid = false;
@@ -40,9 +40,8 @@ const Login = ({}) => {
             isValid = false;
             formError = { ...formError, password: 'Cannot be blank' };
         }
-        
-        setError(formError);
 
+        setError(formError);
         return isValid;
     };
 
@@ -51,7 +50,7 @@ const Login = ({}) => {
             return;
         }
 
-        login(email, password)
+        login(name, email, password)
             .then((res) => {
                 console.log(res);
             })
@@ -64,6 +63,24 @@ const Login = ({}) => {
         <StyledPaper elevation={3}>
             <Box>
                 <form autoComplete="off">
+                    <Grid container spacing={3} alignItems="center">
+                        <Grid item>
+                            <Face />
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                                size="small"
+                                id="outlined-basic"
+                                label="Name"
+                                type="text"
+                                variant="outlined"
+                                error={!!error.name}
+                                helperText={error.name}
+                                required
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </Grid>
+                    </Grid>
                     <Grid container spacing={3} alignItems="center">
                         <Grid item>
                             <MailOutline />
@@ -113,15 +130,12 @@ const Login = ({}) => {
                         }}
                         onClick={() => handleSubmitForm()}
                     >
-                        Login
+                        Register
                     </Button>
                 </form>
-                <StyledLink to="/register">
-                    Not registered? Click here to create an account.
-                </StyledLink>
             </Box>
         </StyledPaper>
     );
 };
 
-export default Login;
+export default Register;
