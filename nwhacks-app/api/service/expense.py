@@ -1,14 +1,20 @@
-class Expense:
-    """
-    Expense class tracks information related to an individual expense.
-    """
-    def __init__(self, expense_PK, receipt_FK, price, item_name, quantity=None):
-        """
-        Note: date must be formatted "YYYY-MM-DD"
-        """
-        self.expense_PK = expense_PK
-        self.receipt_FK = receipt_FK
-        self.price = int(price)
-        self.item_name = item_name
-        self.quantity = int(quantity) if quantity else None 
+# import os
+# import hashlib
+# from flask import Blueprint, redirect, url_for, request
+# from ..models import User
+# from ..models import Receipt
+# from ..models import Expense
+# from ..db import Session
 
+# from ..config import KEY
+# from ..config import ENDPOINT
+
+# expense = Blueprint('expense', __name__)
+
+# @form_client.route('/get_expenses', methods=["GET"])
+# def get_expenses():
+#     # query expenses by month
+#     month = request.args.get('month')
+#     expense_list = session.query(Expense).filter_by(Expense.date.month=month)
+
+#     return {'expenses': expenses}

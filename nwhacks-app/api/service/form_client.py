@@ -23,7 +23,7 @@ def extract():
     form_recognizer_client = FormRecognizerClient(ENDPOINT, AzureKeyCredential(KEY))
 
     receiptUrl = request.form.get('receipt')
-    user_id = request.form.get('user_id')
+    # user_id = request.form.get('user_id')
     
     poller = form_recognizer_client.begin_recognize_receipts_from_url(receiptUrl)
     result = poller.result()
@@ -32,7 +32,7 @@ def extract():
     expenses = []
 
     for receipt in result:
-        name = "unknown"
+        rec_name = "unknown"
         date = "unknown"
         num_items = 0
         total_price = 0
@@ -55,22 +55,27 @@ def extract():
                         if item_name == "quantity":
                             quantity = int(item.value)
                         print("......{}: {} has confidence {}".format(item_name, item.value, item.confidence))
-                    expense = Expense(item_name=exp_name, price=price, quantity=quantity)
+                    expense = Expense(item_name=exp_name, vendor_name=rec_name, date=date, price=price, quantity=quantity)
                     expenses.append(expense)
             else:
                 if (name == "MerchantName"):
-                    name = field.value
+                    rec_name = field.value
                 if (name == "TransactionDate"):
                     date = field.value
                 print("{}: {} has confidence {}".format(name, field.value, field.confidence))
         
-        receipt = Receipt(name=name, date=date, num_items=num_items, total_price=total_price)
+        receipt = Receipt(name=rec_name, date=date, num_items=num_items, total_price=total_price)
         for expense in expenses:
             receipt.expenses.append(expense)
-        reciepts.append(receipt)
+        receipts.append(receipt)
     
     session.add_all(receipts)
+    session.add_all(expenses)
     session.commit()
+
+    return "Success"
+
+    return 
     
 
 

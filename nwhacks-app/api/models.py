@@ -18,6 +18,7 @@ class Receipt(Base):
     name = Column(String(100))
     date = Column(Date)
     num_items = Column(Integer)
+    total_price = Column(Integer)
     expenses = relationship('Expense', backref='expense', lazy=True)
     
 class Expense(Base):
@@ -25,5 +26,7 @@ class Expense(Base):
     id = Column(Integer, primary_key=True)
     receipt_fk = Column(Integer, ForeignKey('receipt.id'))
     item_name = Column(String(100))
+    vendor_name = Column(String(100))
+    date = Column(Date)
     price = Column(Integer)
     quantity = Column(Integer)
